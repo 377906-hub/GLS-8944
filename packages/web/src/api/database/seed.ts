@@ -1,0 +1,456 @@
+import { db } from "./index";
+import * as schema from "./schema";
+
+/**
+ * Seeds placeholder catalog content. Run: bun --env-file=../../.env src/api/database/seed.ts
+ * All product/strain names are invented — no real-world trademarks.
+ */
+
+const strainRows: (typeof schema.strains.$inferInsert)[] = [
+  {
+    slug: "gelato-cut",
+    name: "Gelato Cut",
+    type: "hybrid",
+    lineage: "Sunset Sherb × Thin Mint Cookie",
+    terpenes: "Caryophyllene,Limonene,Linalool",
+    effects: "Euphoric,Creative,Body Calm",
+    thcLow: 78,
+    thcHigh: 87,
+    flavorNotes: "Sweet cream, citrus zest, cracked pepper",
+    description:
+      "The house cut. We chased this pheno for two seasons before it made the lineup — dessert on the inhale, black pepper on the back end, and a body weight that shows up about four minutes late. Our most requested tank, three years running.",
+    image: "/images/strain-macro.png",
+    featured: true,
+  },
+  {
+    slug: "sunset-runtz",
+    name: "Sunset Runtz",
+    type: "hybrid",
+    lineage: "Pink Sherb × Tropic Candy",
+    terpenes: "Limonene,Myrcene,Bisabolol",
+    effects: "Warm,Social,Giggly",
+    thcLow: 74,
+    thcHigh: 82,
+    flavorNotes: "Pink guava, sugared lemon, soft floral",
+    description:
+      "Candy-forward and unbothered. Sunset Runtz is the one you hand to somebody who says they don't like the taste of cannabis. Bright up top, gentle in the chest, sociable the whole way through.",
+    image: "/images/flatlay.png",
+    featured: true,
+  },
+  {
+    slug: "acai-fizz",
+    name: "Acai Fizz",
+    type: "sativa",
+    lineage: "Berry Static × Lemon Sap",
+    terpenes: "Terpinolene,Limonene,Ocimene",
+    effects: "Alert,Talkative,Clear",
+    thcLow: 80,
+    thcHigh: 88,
+    flavorNotes: "Dark berry, seltzer citrus, green stem",
+    description:
+      "Daytime tank. Terpinolene-dominant, so it reads sharp and carbonated rather than sweet. Good for studio hours, long drives, and the part of the afternoon that usually loses you.",
+    image: "/images/strain-macro.png",
+    featured: false,
+  },
+  {
+    slug: "blue-nova",
+    name: "Blue Nova",
+    type: "indica",
+    lineage: "Midnight Kush × Blue Fuel",
+    terpenes: "Myrcene,Caryophyllene,Humulene",
+    effects: "Heavy,Sedating,Quiet",
+    thcLow: 76,
+    thcHigh: 85,
+    flavorNotes: "Blueberry skin, diesel, damp earth",
+    description:
+      "The lights-out option. Myrcene-heavy and honest about it — Blue Nova is a last-pull-of-the-night strain, not a productivity strain. Don't make plans after.",
+    image: "/images/flatlay.png",
+    featured: false,
+  },
+  {
+    slug: "papaya-static",
+    name: "Papaya Static",
+    type: "hybrid",
+    lineage: "Papaya Punch × Static Line",
+    terpenes: "Myrcene,Pinene,Caryophyllene",
+    effects: "Balanced,Loose,Focused",
+    thcLow: 77,
+    thcHigh: 84,
+    flavorNotes: "Ripe papaya, pine sap, brown sugar",
+    description:
+      "Our middle of the road, in the best way. Tropical on the nose, resinous underneath, and even enough that it works at noon or midnight. If you only keep one tank in rotation, most of the shop keeps this one.",
+    image: "/images/strain-macro.png",
+    featured: true,
+  },
+  {
+    slug: "sherb-fade",
+    name: "Sherb Fade",
+    type: "indica",
+    lineage: "Sunset Sherb × Fade OG",
+    terpenes: "Linalool,Myrcene,Limonene",
+    effects: "Mellow,Warm,Sleepy",
+    thcLow: 75,
+    thcHigh: 83,
+    flavorNotes: "Sherbet, lavender, orange rind",
+    description:
+      "Soft-landing indica. Linalool up front gives it an almost perfumed lavender note that people either love immediately or take a session to get. Either way it puts you down easy.",
+    image: "/images/flatlay.png",
+    featured: false,
+  },
+  {
+    slug: "midnight-cherry",
+    name: "Midnight Cherry",
+    type: "indica",
+    lineage: "Cherry Static × Black Fuel",
+    terpenes: "Caryophyllene,Myrcene,Nerolidol",
+    effects: "Deep,Physical,Still",
+    thcLow: 79,
+    thcHigh: 86,
+    flavorNotes: "Black cherry, cocoa, gasoline",
+    description:
+      "Dark and syrupy. Midnight Cherry is the most 'expensive tasting' thing we press — cherry cola over a diesel base. Small-batch, and it sells out the week it drops.",
+    image: "/images/strain-macro.png",
+    featured: true,
+  },
+  {
+    slug: "neon-haze",
+    name: "Neon Haze",
+    type: "sativa",
+    lineage: "Green Line Haze × Citrus Static",
+    terpenes: "Terpinolene,Pinene,Limonene",
+    effects: "Electric,Creative,Chatty",
+    thcLow: 81,
+    thcHigh: 89,
+    flavorNotes: "Lime peel, incense, wet pine",
+    description:
+      "The loudest thing in the case. Neon Haze is a proper haze — sharp, incensed, slightly feral. Built for the first hour of a session, not the last.",
+    image: "/images/flatlay.png",
+    featured: false,
+  },
+];
+
+const productRows: (typeof schema.products.$inferInsert)[] = [
+  // ── SCREW-ONS ────────────────────────────────────────────────────────────
+  {
+    slug: "gelato-cut-1g-cart",
+    name: "Gelato Cut",
+    category: "screw-ons",
+    strainSlug: "gelato-cut",
+    strainType: "hybrid",
+    size: "1g",
+    priceCents: 4200,
+    compareAtCents: 5000,
+    thc: 84.6,
+    cbd: 0.4,
+    hardware: "510-thread · ceramic core",
+    tagline: "The house cut. Dessert on the inhale, pepper on the exit.",
+    description:
+      "Live-resin Gelato Cut in a 510-thread glass tank with a ceramic heating core — no cuts, no additives, nothing but strain-specific terpenes reintroduced after extraction. Pulls clean at low voltage and stays clear down to the last third.",
+    image: "/images/cart-amber.png",
+    badges: "Best Seller,Live Resin",
+    featured: true,
+    sortOrder: 1,
+  },
+  {
+    slug: "sunset-runtz-1g-cart",
+    name: "Sunset Runtz",
+    category: "screw-ons",
+    strainSlug: "sunset-runtz",
+    strainType: "hybrid",
+    size: "1g",
+    priceCents: 4000,
+    thc: 79.2,
+    cbd: 0.6,
+    hardware: "510-thread · ceramic core",
+    tagline: "Pink guava and sugared lemon. Sociable start to finish.",
+    description:
+      "A candy-forward hybrid tank for people who want the flavor to do the talking. Cold-cured resin, strain-specific terpenes, and a wide airway that keeps the draw loose.",
+    image: "/images/cart-rose.png",
+    badges: "Live Resin",
+    featured: true,
+    sortOrder: 2,
+  },
+  {
+    slug: "acai-fizz-1g-cart",
+    name: "Acai Fizz",
+    category: "screw-ons",
+    strainSlug: "acai-fizz",
+    strainType: "sativa",
+    size: "1g",
+    priceCents: 4200,
+    thc: 86.1,
+    cbd: 0.2,
+    hardware: "510-thread · ceramic core",
+    tagline: "Terpinolene-dominant daytime tank. Sharp and carbonated.",
+    description:
+      "Our highest-testing sativa cart. Acai Fizz leans terpinolene, which reads more seltzer than syrup — bright, dry, and clear-headed enough for working hours.",
+    image: "/images/cart-violet.png",
+    badges: "High Potency",
+    featured: false,
+    sortOrder: 3,
+  },
+  {
+    slug: "papaya-static-1g-cart",
+    name: "Papaya Static",
+    category: "screw-ons",
+    strainSlug: "papaya-static",
+    strainType: "hybrid",
+    size: "1g",
+    priceCents: 3800,
+    thc: 81.4,
+    cbd: 0.5,
+    hardware: "510-thread · ceramic core",
+    tagline: "Tropical over resin. The one the shop keeps in rotation.",
+    description:
+      "The most balanced tank we make and the one most of our staff actually buys. Ripe papaya on the front, pine and brown sugar underneath, even from noon to midnight.",
+    image: "/images/cart-rose.png",
+    badges: "Staff Pick",
+    featured: true,
+    sortOrder: 4,
+  },
+  {
+    slug: "blue-nova-1g-cart",
+    name: "Blue Nova",
+    category: "screw-ons",
+    strainSlug: "blue-nova",
+    strainType: "indica",
+    size: "1g",
+    priceCents: 4000,
+    thc: 82.7,
+    cbd: 0.8,
+    hardware: "510-thread · ceramic core",
+    tagline: "Myrcene-heavy and honest about it. Lights out.",
+    description:
+      "A nightcap in a tank. Blueberry skin and diesel over damp earth, with the kind of body weight that makes the last hour of the evening disappear.",
+    image: "/images/cart-violet.png",
+    badges: "Nighttime",
+    featured: false,
+    sortOrder: 5,
+  },
+  {
+    slug: "neon-haze-1g-cart",
+    name: "Neon Haze",
+    category: "screw-ons",
+    strainSlug: "neon-haze",
+    strainType: "sativa",
+    size: "1g",
+    priceCents: 4400,
+    thc: 88.3,
+    cbd: 0.1,
+    hardware: "510-thread · ceramic core",
+    tagline: "A proper haze. Sharp, incensed, slightly feral.",
+    description:
+      "The loudest thing in our case, and the highest-testing. Lime peel and incense over wet pine. Built for the first hour of a session — you will feel this one arrive.",
+    image: "/images/cart-amber.png",
+    badges: "Limited,High Potency",
+    featured: false,
+    sortOrder: 6,
+  },
+
+  // ── DISPOSABLES ──────────────────────────────────────────────────────────
+  {
+    slug: "society-2g-gelato-cut",
+    name: "Society 2g — Gelato Cut",
+    category: "disposables",
+    strainSlug: "gelato-cut",
+    strainType: "hybrid",
+    size: "2g",
+    priceCents: 6000,
+    compareAtCents: 7000,
+    thc: 85.1,
+    cbd: 0.4,
+    hardware: "Rechargeable · USB-C · adjustable airflow",
+    tagline: "Two grams of the house cut, no hardware required.",
+    description:
+      "Our flagship disposable: 2g of live-resin Gelato Cut in a rechargeable matte-black body with adjustable airflow and a USB-C port. Preheat function for cold mornings, and a window so you always know what's left.",
+    image: "/images/disp-amber.png",
+    badges: "Best Seller,Rechargeable",
+    featured: true,
+    sortOrder: 1,
+  },
+  {
+    slug: "society-2g-midnight-cherry",
+    name: "Society 2g — Midnight Cherry",
+    category: "disposables",
+    strainSlug: "midnight-cherry",
+    strainType: "indica",
+    size: "2g",
+    priceCents: 6400,
+    thc: 84.2,
+    cbd: 0.6,
+    hardware: "Rechargeable · USB-C · adjustable airflow",
+    tagline: "Cherry cola over a diesel base. Small batch.",
+    description:
+      "The most expensive-tasting thing we press, in a 2g rechargeable body. Black cherry and cocoa over gasoline. Batches are small and they go fast — when it's gone it's gone until the next run.",
+    image: "/images/disp-ruby.png",
+    badges: "Limited,Small Batch",
+    featured: true,
+    sortOrder: 2,
+  },
+  {
+    slug: "society-2g-sherb-fade",
+    name: "Society 2g — Sherb Fade",
+    category: "disposables",
+    strainSlug: "sherb-fade",
+    strainType: "indica",
+    size: "2g",
+    priceCents: 5800,
+    thc: 80.9,
+    cbd: 0.7,
+    hardware: "Rechargeable · USB-C · adjustable airflow",
+    tagline: "Sherbet and lavender. A soft landing.",
+    description:
+      "Linalool-forward indica in our 2g rechargeable format. Almost perfumed — sherbet, lavender, orange rind — and it puts you down without the freight-train feeling.",
+    image: "/images/disp-mint.png",
+    badges: "Nighttime",
+    featured: false,
+    sortOrder: 3,
+  },
+  {
+    slug: "society-2g-acai-fizz",
+    name: "Society 2g — Acai Fizz",
+    category: "disposables",
+    strainSlug: "acai-fizz",
+    strainType: "sativa",
+    size: "2g",
+    priceCents: 6000,
+    thc: 86.8,
+    cbd: 0.2,
+    hardware: "Rechargeable · USB-C · adjustable airflow",
+    tagline: "Dark berry and seltzer citrus. Daytime, all day.",
+    description:
+      "Two grams of our sharpest sativa. Adjustable airflow matters here — open it up and Acai Fizz gets bright and dry, close it down and the berry comes forward.",
+    image: "/images/disp-ruby.png",
+    badges: "Rechargeable",
+    featured: false,
+    sortOrder: 4,
+  },
+  {
+    slug: "society-2g-papaya-static",
+    name: "Society 2g — Papaya Static",
+    category: "disposables",
+    strainSlug: "papaya-static",
+    strainType: "hybrid",
+    size: "2g",
+    priceCents: 5600,
+    thc: 82.0,
+    cbd: 0.5,
+    hardware: "Rechargeable · USB-C · adjustable airflow",
+    tagline: "The everyday two-gram. Even from noon to midnight.",
+    description:
+      "If you want one disposable that does everything, this is it. Papaya and pine sap, balanced effects, and the lowest price per gram in the lineup.",
+    image: "/images/disp-amber.png",
+    badges: "Staff Pick,Best Value",
+    featured: true,
+    sortOrder: 5,
+  },
+  {
+    slug: "society-2g-blue-nova",
+    name: "Society 2g — Blue Nova",
+    category: "disposables",
+    strainSlug: "blue-nova",
+    strainType: "indica",
+    size: "2g",
+    priceCents: 5800,
+    thc: 83.4,
+    cbd: 0.8,
+    hardware: "Rechargeable · USB-C · adjustable airflow",
+    tagline: "Blueberry skin and diesel. Don't make plans after.",
+    description:
+      "Our heaviest disposable. Blue Nova in a 2g rechargeable body — one or two pulls is genuinely the dose for most people. Treat it accordingly.",
+    image: "/images/disp-mint.png",
+    badges: "Nighttime",
+    inStock: false,
+    featured: false,
+    sortOrder: 6,
+  },
+];
+
+const testimonialRows: (typeof schema.testimonials.$inferInsert)[] = [
+  {
+    name: "Dev Ramirez",
+    handle: "@devinthecut",
+    role: "Barber, Fade Theory",
+    city: "Los Angeles",
+    quote:
+      "I've been through every 2g on Melrose. The Society is the only one that tastes the same on the last pull as the first. That's the whole review.",
+    productSlug: "society-2g-gelato-cut",
+    rating: 5,
+    sortOrder: 1,
+  },
+  {
+    name: "Naomi Osei",
+    handle: "@naomi.prints",
+    role: "Screen printer",
+    city: "Oakland",
+    quote:
+      "Acai Fizz is the only cart I can pull during a print run and still hit registration. Everything else fogs me up. This one keeps me sharp.",
+    productSlug: "acai-fizz-1g-cart",
+    rating: 5,
+    sortOrder: 2,
+  },
+  {
+    name: "Marcus Tran",
+    handle: "@mtran.wav",
+    role: "Producer",
+    city: "Long Beach",
+    quote:
+      "Bought Papaya Static on a staff rec and it's been in my bag for eight months. Sessions run long and it never turns on me.",
+    productSlug: "society-2g-papaya-static",
+    rating: 5,
+    sortOrder: 3,
+  },
+  {
+    name: "Priya Raghunathan",
+    handle: "@priya.eats",
+    role: "Line cook",
+    city: "Santa Ana",
+    quote:
+      "After a double, Midnight Cherry. Tastes like cherry cola and gasoline in a way I can't explain to my mother but absolutely stand behind.",
+    productSlug: "society-2g-midnight-cherry",
+    rating: 5,
+    sortOrder: 4,
+  },
+  {
+    name: "Cole Whitfield",
+    handle: "@colewhit",
+    role: "Gallery assistant",
+    city: "San Diego",
+    quote:
+      "The hardware is the underrated part. Adjustable airflow, USB-C, and it hasn't clogged once. I've thrown away four other brands this year.",
+    productSlug: "society-2g-sherb-fade",
+    rating: 5,
+    sortOrder: 5,
+  },
+  {
+    name: "Simone Adebayo",
+    handle: "@simoneshoots",
+    role: "Photographer",
+    city: "Sacramento",
+    quote:
+      "I came for the packaging, stayed for the Gelato Cut. Whoever is doing their art direction should be doing everyone's.",
+    productSlug: "gelato-cut-1g-cart",
+    rating: 5,
+    sortOrder: 6,
+  },
+];
+
+async function seed() {
+  await db.delete(schema.orderItems);
+  await db.delete(schema.orders);
+  await db.delete(schema.inquiries);
+  await db.delete(schema.testimonials);
+  await db.delete(schema.products);
+  await db.delete(schema.strains);
+
+  await db.insert(schema.strains).values(strainRows);
+  await db.insert(schema.products).values(productRows);
+  await db.insert(schema.testimonials).values(testimonialRows);
+
+  console.log(
+    `Seeded ${strainRows.length} strains, ${productRows.length} products, ` +
+      `${testimonialRows.length} testimonials.`,
+  );
+}
+
+await seed();
