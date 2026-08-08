@@ -228,7 +228,16 @@
   width: max-content;
   animation: gls-marquee var(--marquee-duration, 34s) linear infinite;
 }
+Body{
+  caret-color:transparent;
+}
 
+
+Input,
+textarea,
+[contentedditable="true"]{
+  caret-color: auto;
+}
 .gls-marquee-track[data-reverse="true"] {
   animation-direction: reverse;
 }
