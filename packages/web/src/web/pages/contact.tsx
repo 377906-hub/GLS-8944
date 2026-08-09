@@ -1,7 +1,7 @@
-```tsx
 import { useState } from "react";
 import { useSearchParams } from "wouter";
 import { Check, Mail, MapPin, Phone } from "lucide-react";
+import { PageHero } from "../components/page-hero";
 import { Pill } from "../components/ui/pill";
 import { cn } from "@/lib/utils";
 import { useSubmitInquiry } from "../queries/content";
@@ -72,9 +72,14 @@ function Contact() {
 
   return (
     <>
+      <PageHero
+        eyebrow="Contact"
+        title="Let's talk."
+        description="Questions, support, or anything else — send us a message."
+      />
+
       <section className="shell pb-20 md:pb-28">
         <div className="grid gap-5 lg:grid-cols-12">
-          {/* Form */}
           <div className="panel panel-sheen p-7 md:p-10 lg:col-span-7">
             {submit.isSuccess ? (
               <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
@@ -214,7 +219,6 @@ function Contact() {
             )}
           </div>
 
-          {/* Side info */}
           <div className="flex flex-col gap-4 lg:col-span-5 md:gap-5">
             <div className="panel panel-sheen p-7 md:p-8">
               <span className="label-xs text-acid">Direct lines</span>
@@ -284,4 +288,3 @@ function Contact() {
 }
 
 export default Contact;
-```
