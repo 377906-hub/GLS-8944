@@ -1,142 +1,183 @@
-import { ArrowDownRight, ArrowRight, FlaskConical, Leaf, Palette, Users } from "lucide-react";
 import { Link } from "wouter";
+import { ArrowRight, FlaskConical, Leaf, Palette, Users } from "lucide-react";
+import { PageHero } from "../components/page-hero";
 import { Pill } from "../components/ui/pill";
+import { Marquee } from "../components/marquee";
 import { Reveal, RevealItem } from "../components/reveal";
+import { SectionHeader } from "../components/section-header";
+import { cn } from "@/lib/utils";
 
 const GALLERY = [
   {
     src: "/images/society.png",
-    alt: "Green Leaf Society gallery night",
-    label: "Community / 01",
-    size: "md:col-span-7 md:row-span-2",
+    alt: "A Green Leaf Society gallery night in East LA",
+    caption: "Gallery night 41",
+    meta: "Every third Thursday",
+    span: "md:col-span-7 aspect-[16/10]",
   },
   {
     src: "/images/flatlay.png",
-    alt: "Green Leaf Society packaging and artwork",
-    label: "Objects / 02",
-    size: "md:col-span-5",
+    alt: "Packaging flatlay with artist panels",
+    caption: "Artist panels",
+    meta: "Current packaging run",
+    span: "md:col-span-5 aspect-[4/5]",
+  },
+  {
+    src: "/images/strain-macro.png",
+    alt: "Macro shot of trichome-covered flower",
+    caption: "Macro",
+    meta: "Single-harvest flower",
+    span: "md:col-span-5 aspect-[4/5]",
+  },
+  {
+    src: "/images/store.png",
+    alt: "Jars and hardware on a lit counter",
+    caption: "The counter",
+    meta: "Batch jars, hand-labelled",
+    span: "md:col-span-7 aspect-[16/10]",
   },
   {
     src: "/images/lifestyle.png",
-    alt: "Green Leaf Society lifestyle photography",
-    label: "Life / 03",
-    size: "md:col-span-5",
+    alt: "A member of the Society holding a disposable",
+    caption: "Members",
+    meta: "Studio session, print swap",
+    span: "md:col-span-6 aspect-[3/2]",
+  },
+  {
+    src: "/images/hero.png",
+    alt: "Green Leaf Society hardware lineup",
+    caption: "The lineup",
+    meta: "Screw-ons & disposables",
+    span: "md:col-span-6 aspect-[3/2]",
   },
 ];
 
 const VALUES = [
   {
     Icon: Leaf,
-    number: "01",
-    title: "Origin matters",
-    copy: "We care about where things come from, who made them, and the details that get lost when everything becomes anonymous.",
+    title: "Single-source, always",
+    copy: "One farm, one harvest, per batch. We never blend lots to hit a potency number on a label.",
   },
   {
     Icon: FlaskConical,
-    number: "02",
-    title: "Details matter",
-    copy: "From materials to presentation, every part of the experience is considered before it reaches the room.",
+    title: "Test it, then print it",
+    copy: "No number goes on a box before the COA comes back. If the batch fails, the batch dies.",
   },
   {
     Icon: Palette,
-    number: "03",
-    title: "Artists matter",
-    copy: "Visual culture is part of the Society. We make space for artists, photographers, designers, and makers.",
+    title: "Artists get paid",
+    copy: "Every packaging run features one artist who gets the panel, the credit, and a percentage.",
   },
   {
     Icon: Users,
-    number: "04",
-    title: "People matter",
-    copy: "The best experiences are shared. Community is the center of the brand, not an afterthought.",
+    title: "The room is the point",
+    copy: "Gallery nights, print swaps, and studio sessions. The product funds the culture, not the other way round.",
   },
 ];
 
 function Society() {
   return (
-    <main className="bg-void text-bone">
-      {/* Luxury hero */}
-      <section className="relative flex min-h-[78vh] items-end overflow-hidden border-b border-line">
-        <img
-          src="/images/society.png"
-          alt="Green Leaf Society community"
-          className="absolute inset-0 size-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-void via-void/55 to-void/10" />
-        <div className="absolute inset-0 bg-black/20" />
+    <>
+      <PageHero
+        eyebrow="Gallery"
+        title="A brand, not a shelf"
+        blurb="Rooms, runs, and the people in them. Artist panels, gallery nights, single-harvest flower, and the hardware we put our name on."
+      >
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Pill variant="acid" size="lg" asChild>
+            <Link to="/shop/disposables">
+              Shop the current run <ArrowRight className="size-4" />
+            </Link>
+          </Pill>
+          <Pill variant="ghost" size="lg" asChild>
+            <Link to="/contact">Get in touch</Link>
+          </Pill>
+        </div>
+      </PageHero>
 
-        <div className="shell relative w-full pb-14 pt-32 md:pb-20 lg:pb-24">
-          <div className="flex items-end justify-between gap-8">
-            <div className="max-w-5xl">
-              <p className="label-xs mb-6 text-acid">Green Leaf Society / The Society</p>
-              <h1 className="font-display text-[clamp(3.5rem,10vw,9rem)] font-bold uppercase leading-[0.82] tracking-[-0.06em] text-bone">
-                Elevated
-                <br />
-                <span className="text-acid">experience.</span>
-              </h1>
-              <p className="mt-8 max-w-xl text-base leading-relaxed text-bone/75 md:text-lg">
-                A visual journal of the people, places, objects, and creative energy
-                surrounding Green Leaf Society.
-              </p>
+      {/* Image bento */}
+      <section className="shell pb-16 md:pb-24">
+        <Reveal className="grid gap-4 md:grid-cols-12 md:gap-5">
+          <RevealItem className="md:col-span-7">
+            <div className="panel relative aspect-[16/10] w-full">
+              <img
+                src="/images/society.png"
+                alt="A Green Leaf Society gallery night"
+                loading="lazy"
+                className="size-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-void/85 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-9">
+                <span className="label-xs text-acid">Gallery night 41</span>
+                <p className="display-sm mt-3 max-w-[24ch] text-bone">
+                  Every third Thursday, somewhere in East LA
+                </p>
+              </div>
             </div>
+          </RevealItem>
 
-            <a
-              href="#gallery"
-              aria-label="Scroll to gallery"
-              className="mb-1 hidden size-14 shrink-0 items-center justify-center rounded-full border border-bone/30 text-bone transition hover:border-acid hover:text-acid md:flex"
-            >
-              <ArrowDownRight className="size-5" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Intro */}
-      <section className="shell py-20 md:py-28 lg:py-36">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
-          <p className="label-xs text-acid lg:col-span-3">The Society</p>
-          <div className="lg:col-span-8 lg:col-start-5">
-            <h2 className="font-display text-4xl font-semibold leading-tight tracking-[-0.035em] text-bone md:text-6xl">
-              More than a product. A point of view.
-            </h2>
-            <p className="mt-7 max-w-2xl text-base leading-8 text-ash md:text-lg">
-              Green Leaf Society is built around a simple idea: the details change the
-              experience. The photography, the packaging, the spaces, the people —
-              everything should feel intentional, tactile, and unmistakably ours.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section id="gallery" className="shell scroll-mt-20 pb-20 md:pb-32">
-        <div className="mb-10 flex items-end justify-between gap-6 md:mb-14">
-          <div>
-            <p className="label-xs text-acid">01 / Gallery</p>
-            <h2 className="font-display mt-4 text-4xl font-semibold tracking-[-0.035em] md:text-6xl">
-              In the Society
-            </h2>
-          </div>
-          <p className="hidden max-w-xs text-right text-sm leading-relaxed text-ash md:block">
-            A collection of moments from the culture around the brand.
-          </p>
-        </div>
-
-        <Reveal className="grid auto-rows-[240px] gap-4 md:auto-rows-[280px] md:grid-cols-12 md:gap-5">
-          {GALLERY.map((image, index) => (
-            <RevealItem key={image.src} className={image.size}>
-              <figure className="group relative h-full overflow-hidden rounded-[2px] bg-panel-2">
+          <RevealItem className="md:col-span-5">
+            <div className="flex h-full flex-col gap-4 md:gap-5">
+              <div className="panel panel-sheen flex flex-1 flex-col justify-center p-7 md:p-9">
+                <p className="font-display text-6xl font-bold leading-none text-acid">41</p>
+                <p className="text-ash mt-4 text-sm leading-relaxed">
+                  gallery nights funded — artists paid, walls filled, nobody asked to
+                  work for exposure.
+                </p>
+              </div>
+              <div className="panel relative aspect-[4/3] w-full">
                 <img
-                  src={image.src}
-                  alt={image.alt}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  className="size-full object-cover transition duration-700 ease-out group-hover:scale-[1.035]"
+                  src="/images/flatlay.png"
+                  alt="Packaging flatlay with artist panels"
+                  loading="lazy"
+                  className="size-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
-                <figcaption className="absolute inset-x-0 bottom-0 flex items-center justify-between p-5 md:p-7">
-                  <span className="label-xs text-bone">{image.label}</span>
-                  <span className="grid size-9 place-items-center rounded-full border border-bone/30 text-bone transition group-hover:border-acid group-hover:text-acid">
-                    <ArrowRight className="size-4 -rotate-45" />
-                  </span>
+              </div>
+            </div>
+          </RevealItem>
+        </Reveal>
+      </section>
+
+      <Marquee
+        items={["Where cannabis, art & culture collide", "Green Leaf Society"]}
+        duration={46}
+        accent
+      />
+
+      {/* Gallery grid */}
+      <section className="shell py-20 md:py-28">
+        <SectionHeader
+          align="left"
+          eyebrow="The gallery"
+          title={
+            <>
+              Rooms, runs
+              <br />
+              &amp; the people in them
+            </>
+          }
+          blurb="Shot on the nights and in the rooms where the work actually happens. No stock, no studio gloss."
+        />
+
+        <Reveal className="mt-14 grid gap-4 md:mt-16 md:grid-cols-12 md:gap-5">
+          {GALLERY.map((shot) => (
+            <RevealItem key={shot.src + shot.caption} className={shot.span.split(" ")[0]}>
+              <figure
+                className={cn(
+                  "panel group relative w-full overflow-hidden",
+                  shot.span.split(" ")[1],
+                )}
+              >
+                <img
+                  src={shot.src}
+                  alt={shot.alt}
+                  loading="lazy"
+                  className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-void/85 via-void/10 to-transparent" />
+                <figcaption className="absolute inset-x-0 bottom-0 p-6 md:p-7">
+                  <span className="label-xs text-acid">{shot.caption}</span>
+                  <p className="text-bone/80 mt-2 text-[0.8125rem]">{shot.meta}</p>
                 </figcaption>
               </figure>
             </RevealItem>
@@ -144,84 +185,95 @@ function Society() {
         </Reveal>
       </section>
 
-      {/* Statement */}
-      <section className="border-y border-line bg-panel-2">
-        <div className="shell py-20 md:py-28 lg:py-36">
-          <p className="label-xs text-acid">02 / Experience</p>
-          <blockquote className="mt-8 max-w-6xl font-display text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-bone md:text-6xl lg:text-8xl">
-            “Every visit should feel like you discovered something.”
-          </blockquote>
-          <div className="mt-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-xl text-sm leading-7 text-ash md:text-base">
-              We believe premium is not about excess. It is about restraint, consistency,
-              craft, and creating enough space for the details to speak for themselves.
-            </p>
-            <Pill variant="ghost" size="lg" asChild>
-              <Link to="/contact">
-                Start a conversation <ArrowRight className="size-4" />
-              </Link>
-            </Pill>
-          </div>
-        </div>
-      </section>
-
       {/* Values */}
-      <section className="shell py-20 md:py-32">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-4">
-            <p className="label-xs text-acid">03 / Principles</p>
-            <h2 className="font-display mt-5 text-4xl font-semibold leading-tight tracking-[-0.035em] md:text-5xl">
-              The details are the brand.
-            </h2>
-          </div>
-
-          <Reveal className="grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:col-span-8">
-            {VALUES.map(({ Icon, number, title, copy }) => (
-              <RevealItem key={title}>
-                <article className="h-full bg-void p-7 transition duration-300 hover:bg-panel-2 md:p-9">
-                  <div className="flex items-center justify-between">
-                    <span className="label-xs text-acid">{number}</span>
-                    <Icon className="size-5 text-ash" />
-                  </div>
-                  <h3 className="mt-12 font-display text-2xl font-semibold text-bone md:text-3xl">
-                    {title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-ash">{copy}</p>
-                </article>
-              </RevealItem>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Closing image */}
-      <section className="shell pb-20 md:pb-32">
-        <div className="relative min-h-[420px] overflow-hidden md:min-h-[620px]">
-          <img
-            src="/images/lifestyle.png"
-            alt="Green Leaf Society lifestyle"
-            loading="lazy"
-            className="absolute inset-0 size-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-void via-void/20 to-transparent" />
-          <div className="relative flex min-h-[420px] flex-col justify-end p-7 md:min-h-[620px] md:p-12 lg:p-16">
-            <p className="label-xs text-acid">04 / Continue exploring</p>
-            <div className="mt-5 flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
-              <h2 className="max-w-3xl font-display text-4xl font-semibold leading-none tracking-[-0.04em] text-bone md:text-6xl lg:text-7xl">
-                Stay curious.
-                <br />
-                Stay connected.
-              </h2>
-              <Pill variant="acid" size="lg" asChild>
-                <Link to="/contact">
-                  Get in touch <ArrowRight className="size-4" />
-                </Link>
-              </Pill>
+      <section className="shell pb-20 md:pb-28">
+        <div className="grid gap-5 lg:grid-cols-12">
+          <div className="panel relative min-h-[340px] lg:col-span-5">
+            <img
+              src="/images/lifestyle.png"
+              alt="A member of the Society holding a disposable"
+              loading="lazy"
+              className="absolute inset-0 size-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-void/80 to-transparent" />
+            <div className="relative flex h-full flex-col justify-end p-7 md:p-9">
+              <span className="label-xs text-acid">What we stand on</span>
+              <h2 className="display-md mt-4 max-w-[14ch] text-bone">Four rules we don't bend</h2>
             </div>
           </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7 md:gap-5">
+            {VALUES.map((value) => (
+              <div key={value.title} className="panel panel-sheen p-7 md:p-8">
+                <span className="grid size-11 place-items-center rounded-full border border-line bg-panel-2 text-acid">
+                  <value.Icon className="size-4" />
+                </span>
+                <h3 className="display-sm mt-6 text-bone">{value.title}</h3>
+                <p className="text-ash mt-3 text-[0.875rem] leading-relaxed">
+                  {value.copy}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-    </main>
+
+      {/* Lab testing — linked from the footer as /society#testing */}
+      <section id="testing" className="shell scroll-mt-28 pb-20 md:pb-28">
+        <div className="panel panel-sheen p-7 md:p-12 lg:p-16">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <span className="label-xs text-acid">Lab results</span>
+              <h2 className="display-lg mt-5 max-w-[16ch] text-bone">
+                Every batch, on paper
+              </h2>
+              <p className="text-ash mt-6 max-w-[52ch] text-[0.9375rem] leading-relaxed">
+                Each press is sent to a licensed third-party lab before it's packed. We
+                test for cannabinoid potency, full terpene profile, pesticides, residual
+                solvents, heavy metals, and microbials. The batch number printed on your
+                box pulls up that exact report.
+              </p>
+
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Pill variant="acid" asChild>
+                  <Link to="/contact">
+                    Request a COA <ArrowRight className="size-4" />
+                  </Link>
+                </Pill>
+                <Pill variant="ghost" asChild>
+                  <Link to="/strains">See strain panels</Link>
+                </Pill>
+              </div>
+
+              <p className="text-ash/70 mt-8 text-[0.6875rem] leading-relaxed">
+                Lab figures shown across this site are illustrative placeholder content
+                for this build and do not represent real test results.
+              </p>
+            </div>
+
+            <dl className="grid grid-cols-2 gap-4 self-start">
+              {[
+                { label: "Potency", value: "100%", note: "of batches tested" },
+                { label: "Pesticides", value: "0", note: "detected, 2026 runs" },
+                { label: "Additives", value: "None", note: "no MCT, PG, or VG" },
+                { label: "Turnaround", value: "9 days", note: "press to shelf" },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-2xl border border-line bg-panel-2 p-5 md:p-6"
+                >
+                  <dt className="label-xs text-ash">{stat.label}</dt>
+                  <dd className="mt-3 font-display text-3xl font-bold leading-none text-acid">
+                    {stat.value}
+                  </dd>
+                  <p className="text-ash mt-2.5 text-[0.6875rem]">{stat.note}</p>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
