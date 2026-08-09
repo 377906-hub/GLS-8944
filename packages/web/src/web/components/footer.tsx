@@ -13,8 +13,7 @@ const COLUMNS = [
   {
     title: "Society",
     links: [
-      { label: "Our Story", href: "/society" },
-      { label: "Contact", href: "/contact" },
+
     ],
   },
   {

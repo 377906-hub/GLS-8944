@@ -41,7 +41,7 @@ function Strains() {
       <PageHero
         eyebrow="The strain library"
         title="Read the panel, not the hype"
-        blurb="Every strain we press gets a full write-up: lineage, dominant terpenes, effects, THC range, and what it actually tastes like. No vague 'uplifting' nonsense."
+        blurb="Every strain  gets a full write-up: THC range, and what it actually tastes like. No vague 'uplifting' nonsense."
       >
         <div className="flex flex-wrap items-center gap-2">
           {TYPES.map((type) => {
