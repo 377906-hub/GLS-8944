@@ -42,9 +42,8 @@ function Hero() {
 
           <RevealItem className="mt-7">
             <p className="text-ash mx-auto max-w-[54ch] text-base leading-relaxed md:text-lg">
-              Where cannabis, art, and culture collide. Live-resin screw-ons and 2g
-              rechargeable disposables, pressed in small batches for people who actually
-              read the terpene panel.
+              Where cannabis, art, and culture collide. screw-ons and 2g
+              rechargeable disposables.
             </p>
           </RevealItem>
 
@@ -77,10 +76,7 @@ function Hero() {
               <div className="absolute inset-x-0 bottom-0 p-5 md:p-8">
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
                   {[
-                    { value: "88%", label: "Peak THC" },
-                    { value: "2g", label: "Rechargeable" },
-                    { value: "Same day", label: "Delivery" },
-                    { value: "0", label: "Additives" },
+            
                   ].map((stat) => (
                     <div
                       key={stat.label}
@@ -109,7 +105,7 @@ function ThreeWaySplit() {
       eyebrow: "01 — Carts",
       title: "Screw-Ons",
       blurb:
-        "510-thread glass tanks, ceramic cores, live resin only. Six strains in rotation.",
+        "510-thread glass tanks, ceramic cores.",
       image: "/images/cart-amber.png",
       cta: "Shop carts",
     },
@@ -249,7 +245,7 @@ function StrainTeaser() {
                 Read the panel, not the hype
               </h2>
               <p className="text-bone/70 mt-4 max-w-[48ch] text-sm leading-relaxed">
-                Every strain we press gets a full write-up: lineage, dominant terpenes,
+                Every strain  gets a full write-up: lineage, dominant terpenes,
                 effects, THC range, and what it actually tastes like. No vague
                 "uplifting" nonsense.
               </p>
