@@ -32,7 +32,7 @@ const COPY: Record<string, { eyebrow: string; title: string; blurb: string }> = 
     eyebrow: "510-thread carts",
     title: "Screw-Ons",
     blurb:
-      "Glass tanks, ceramic cores, live resin only. Screw one onto any 510 battery and taste the difference a single-farm press makes.",
+      "Glass tanks, ceramic cores. Screw one onto any 510 battery and taste the difference .",
   },
   disposables: {
     eyebrow: "All-in-one",
@@ -44,7 +44,7 @@ const COPY: Record<string, { eyebrow: string; title: string; blurb: string }> = 
     eyebrow: "The full catalog",
     title: "Shop everything",
     blurb:
-      "Both lines, every strain currently in rotation. Small batches — when a run is gone it's gone until the next press.",
+      " when a run is gone it's gone until the next",
   },
 };
 
@@ -218,7 +218,7 @@ function Shop() {
       </section>
 
       <Marquee
-        items={["Lab tested every batch", "No cutting agents", "Artist-designed panels"]}
+        items={["Lab tested", "No cutting agents", "Artist-designed panels"]}
         duration={40}
         accent
       />
@@ -229,15 +229,15 @@ function Shop() {
           {[
             {
               title: "Batch-level COAs",
-              copy: "Every press gets third-party tested for potency, pesticides, and residual solvents. Batch code is on the box.",
+              copy: "s Batch code is on the box.",
             },
             {
               title: "Hardware warranty",
-              copy: "Clogged, leaking, or dead on arrival? Message us with the batch code and we replace it, no receipt hunting.",
+              copy: ", leaking on arrival? Message us with the batch code and we replace it.",
             },
             {
               title: "Same-day delivery",
-              copy: "Order before 6pm and it lands the same evening across most of LA, Long Beach, Santa Ana and San Diego.",
+              copy: "Order before 6pm and it lands the same evening across most of San Diego.",
             },
           ].map((item) => (
             <div key={item.title} className="panel panel-sheen p-7 md:p-8">
