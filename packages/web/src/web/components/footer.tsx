@@ -20,8 +20,6 @@ const COLUMNS = [
   {
     title: "Trade",
     links: [
-      { label: "Wholesale", href: "/contact?kind=wholesale" },
-      { label: "Press", href: "/contact?kind=press" },
       { label: "Lab Results", href: "/society#testing" },
     ],
   },
